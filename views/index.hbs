@@ -6,17 +6,17 @@
         <h1>Sign Up</h1>
         <form action="/signup" method="POST">
           <label>First name</label>
-          <input type="text" name="firstName" required="true">
+          <input type="text" name="firstName" required="true" placeholder="First name">
           <label>Last name</label>
-          <input type="text" name="lastName" required="true">
+          <input type="text" name="lastName" required="true" placeholder="Last name">
           <label>Email</label>
-          <input type="email" name="email" required="true">
+          <input type="email" name="email" required="true" placeholder="Email">
           <label>Phone number</label>
           <input type="tel" name="phoneNumber" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="000-000-0000" required="true">
           <label>Address</label>
-          <input type="text" name="address" required="true">
+          <input type="text" name="address" required="true" placeholder="Address">
           <label>City</label>
-          <input type="text" name="city" required="true">
+          <input type="text" name="city" required="true" placeholder="City">
           <label>State</label>
           <select name="state">
             <option value="AL">Alabama</option>
@@ -72,9 +72,9 @@
             <option value="WY">Wyoming</option>
           </select>
           <label>Postal code</label>
-          <input type="number" name="postCode" required="true">
+          <input type="number" name="postCode" required="true" placeholder="Postal code">
           <label>Password</label>
-          <input type="password" name="password" required="true">	
+          <input type="password" name="password" required="true" placeholder="Password">	
           <button>Sing up</button>
         </form>
       </div>
@@ -83,9 +83,9 @@
         <h1>Login</h1>
         <form action="/login" method="POST">
           <label>Email</label>
-          <input type="email" name="email" required="true">
+          <input type="email" name="email" required="true" placeholder="Email">
           <label>Password</label>
-          <input type="password" name="password" required="true">
+          <input type="password" name="password" required="true" placeholder="Password">
           <button>Login</button>
         </form>
       </div>
