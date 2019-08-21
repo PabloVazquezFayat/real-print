@@ -10,7 +10,6 @@ const passport = require('passport');
 router.post('/signup', async (req, res, next)=>{
   
   try{
-    console.log(req.body);
 
     const pass = req.body.password;
     const salt = bcrypt.genSaltSync(10);
@@ -33,7 +32,6 @@ router.post('/signup', async (req, res, next)=>{
 
     if(email){
       req.flash('error', 'This email is already in user, try again!');
-      console.log('This email is already in user, try again!');
       res.redirect('/');
       return;
     }
@@ -44,7 +42,7 @@ router.post('/signup', async (req, res, next)=>{
       console.log('Created user', req.body);
       req.logIn(user, (error, user)=>{
         res.redirect('/profile');
-      })
+      });
     }
   }catch(error){
     console.log(error);

@@ -18,7 +18,7 @@ const userSchema = new Schema({
     validate: validateEmail,
     match: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 },
-  phoneNumber: {type: Number, minlength: 10, required: true},
+  phoneNumber: {type: String, minlength: 10, required: true},
   address: {type: String, minlength: 5, required: true},
   city: {type: String, minlength: 2, required: true},
   state: {type: String, required: true},

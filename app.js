@@ -15,6 +15,9 @@ const LocalStrategy = require("passport-local").Strategy;
 const flash         = require("connect-flash");
 const User          = require("./models/user/User");
 
+//REGISTER PARTIALS
+hbs.registerPartials(__dirname+"/views/partials");
+
 // Connect to DB
 mongoose.set('useCreateIndex', true);
 mongoose
