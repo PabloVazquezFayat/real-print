@@ -10,6 +10,8 @@ const passport = require('passport');
 router.post('/signup', async (req, res, next)=>{
   
   try{
+    console.log(req.body);
+
     const pass = req.body.password;
     const salt = bcrypt.genSaltSync(10);
     const hashedPassWord =  bcrypt.hashSync(pass, salt);
@@ -31,6 +33,7 @@ router.post('/signup', async (req, res, next)=>{
 
     if(email){
       req.flash('error', 'This email is already in user, try again!');
+      console.log('This email is already in user, try again!');
       res.redirect('/');
       return;
     }
@@ -40,7 +43,7 @@ router.post('/signup', async (req, res, next)=>{
     if(user){
       console.log('Created user', req.body);
       req.logIn(user, (error, user)=>{
-        res.redirect('/');//profile
+        res.redirect('/profile');
       })
     }
   }catch(error){
@@ -52,7 +55,7 @@ router.post('/signup', async (req, res, next)=>{
 
 //Login user
 router.post('/login', passport.authenticate('local', {
-  successRedirect: "/",//profile
+  successRedirect: "/profile",
   failureRedirect: "/",
   failureFlash: true,
   passReqToCallback: true
@@ -65,8 +68,9 @@ router.get('/logout', (req, res, next)=>{
 });
 
 //Get user profile if user is already logged in
-router.get('/', ensureLogin.ensureLoggedIn('/'), (req, res, next)=>{
+router.get('/profile', ensureLogin.ensureLoggedIn('/'), (req, res, next)=>{
   console.log('You sir are logged in');
+  res.render('profile', {message: 'You sir are logged in!'});
 });
 
 module.exports = router;
