@@ -6,7 +6,7 @@ const validateEmail = (email)=> {
   return regex.test(email)
 };
 
-const userSchema = new Schema({
+const adminSchema = new Schema({
   firstName:     {type: String, minlength: 2, required: true},
   lastName: {type: String, minlength: 2, required: true},
   email: {
@@ -18,15 +18,10 @@ const userSchema = new Schema({
     validate: validateEmail,
     match: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 },
-  phoneNumber: {type: String, minlength: 10, required: true},
-  address: {type: String, minlength: 5, required: true},
-  city: {type: String, minlength: 2, required: true},
-  state: {type: String, required: true},
-  postCode: {type: Number, minlength: 5, required: true},
   password: {type: String, minlength: 2, required: true},
-  mailingList: {type: Boolean, default: false, required: true}
+  clearance: {type: Number, default: 1}
 });
 
-const User = mongoose.model('User', userSchema);
+const Admin = mongoose.model('Admin', adminSchema);
 
-module.exports = User;
+module.exports = Admin;
