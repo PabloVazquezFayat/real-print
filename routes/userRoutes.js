@@ -51,22 +51,14 @@ router.post('/signup', async (req, res, next)=>{
 
 });
 
-// //Login user
-// router.post('/login', passport.authenticate('local', {
-//   successRedirect: "/profile",
-//   failureRedirect: "/",
-//   failureFlash: true,
-//   passReqToCallback: true
-// }));
-
 //Login user or admin
 router.post('/login', passport.authenticate('local', {failureRedirect: '/'}),
   async (req, res, next)=>{
     try{
       if(req.user.type === 'admin'){
-        return res.render('adminDashboard', {message:'You sir are logged in as ADMIN'});
+        return res.render('adminDashboard', {message: req.user.type});
       }else{
-        return res.render('profile', {message: 'You sir are logged in as USER!'});
+        return res.render('profile', {message: req.user.type});
       }
     }catch(error){
       next(error);
@@ -83,13 +75,19 @@ router.get('/logout', (req, res, next)=>{
 
 //Get user profile if user is already logged in
 router.get('/profile', ensureLogin.ensureLoggedIn('/'), (req, res, next)=>{
-  console.log('You sir are logged in');
-  res.render('profile', {message:'You sir are logged in as USER'});
+  if(req.user.type === 'user'){
+    return res.render('profile', {message: req.user.type});
+  }else{
+    res.redirect('/');
+  }
 });
 
 router.get('/adminDashboard', ensureLogin.ensureLoggedIn('/'), (req, res, next)=>{
-  console.log('You sir are logged in as ADMIN!');
-  res.render('adminDashboard', {message:'You sir are logged in as ADMIN'});
+  if(req.user.type === 'admin'){
+    return res.render('adminDashboard', {message: req.user.type});
+  }else{
+    res.redirect('/');
+  }
 });
 
 module.exports = router;
