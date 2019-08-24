@@ -51,13 +51,29 @@ router.post('/signup', async (req, res, next)=>{
 
 });
 
-//Login user
-router.post('/login', passport.authenticate('local', {
-  successRedirect: "/profile",
-  failureRedirect: "/",
-  failureFlash: true,
-  passReqToCallback: true
-}));
+// //Login user
+// router.post('/login', passport.authenticate('local', {
+//   successRedirect: "/profile",
+//   failureRedirect: "/",
+//   failureFlash: true,
+//   passReqToCallback: true
+// }));
+
+//Login user or admin
+router.post('/login', passport.authenticate('local', {failureRedirect: '/'}),
+  async (req, res, next)=>{
+    try{
+      if(req.user.type === 'admin'){
+        return res.render('adminDashboard', {message:'You sir are logged in as ADMIN'});
+      }else{
+        return res.render('profile', {message: 'You sir are logged in as USER!'});
+      }
+    }catch(error){
+      next(error);
+    }
+    res.redirect('/');
+  }
+);
 
 //Log out user
 router.get('/logout', (req, res, next)=>{
@@ -68,7 +84,12 @@ router.get('/logout', (req, res, next)=>{
 //Get user profile if user is already logged in
 router.get('/profile', ensureLogin.ensureLoggedIn('/'), (req, res, next)=>{
   console.log('You sir are logged in');
-  res.render('profile', {message: 'You sir are logged in!'});
+  res.render('profile', {message:'You sir are logged in as USER'});
+});
+
+router.get('/adminDashboard', ensureLogin.ensureLoggedIn('/'), (req, res, next)=>{
+  console.log('You sir are logged in as ADMIN!');
+  res.render('adminDashboard', {message:'You sir are logged in as ADMIN'});
 });
 
 module.exports = router;

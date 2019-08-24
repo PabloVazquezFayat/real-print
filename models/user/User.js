@@ -18,13 +18,15 @@ const userSchema = new Schema({
     validate: validateEmail,
     match: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 },
-  phoneNumber: {type: String, minlength: 10, required: true},
-  address: {type: String, minlength: 5, required: true},
-  city: {type: String, minlength: 2, required: true},
-  state: {type: String, required: true},
-  postCode: {type: Number, minlength: 5, required: true},
+  phoneNumber: {type: String, minlength: 10},
+  address: {type: String, minlength: 5},
+  city: {type: String, minlength: 2},
+  state: {type: String, minlength: 2},
+  postCode: {type: Number, minlength: 5},
   password: {type: String, minlength: 2, required: true},
-  mailingList: {type: Boolean, default: false, required: true}
+  mailingList: {type: Boolean, default: false},
+  clearance: {type: Number, default: 1},
+  type: {type: String, default: 'user', required: true,}
 });
 
 const User = mongoose.model('User', userSchema);

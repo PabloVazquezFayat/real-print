@@ -118,8 +118,4 @@ app.use('/', index);
 const userRoutes = require('./routes/userRoutes');
 app.use('/', userRoutes);
 
-const adminRoutes = require('./routes/adminRoutes');
-app.use('/', adminRoutes);
-
-
 module.exports = app;
