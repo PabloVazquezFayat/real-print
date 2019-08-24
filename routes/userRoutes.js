@@ -56,9 +56,11 @@ router.post('/login', passport.authenticate('local', {failureRedirect: '/'}),
   async (req, res, next)=>{
     try{
       if(req.user.type === 'admin'){
-        return res.render('adminDashboard', {message: req.user.type});
+        res.redirect('/adminDashboard');
+        return;
       }else{
-        return res.render('profile', {message: req.user.type});
+        res.redirect('/profile');
+        return;
       }
     }catch(error){
       next(error);
