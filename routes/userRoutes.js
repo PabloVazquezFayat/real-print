@@ -52,24 +52,7 @@ router.post('/signup', async (req, res, next)=>{
 
 });
 
-//Login user or admin
-// router.post('/login', passport.authenticate('local', {failureRedirect: '/'}),
-//   async (req, res, next)=>{
-//     try{
-//       if(req.user.type === 'admin'){
-//         res.redirect('/admin');
-//         return;
-//       }else{
-//         res.redirect('/profile');
-//         return;
-//       }
-//     }catch(error){
-//       next(error);
-//     }
-//     res.redirect('/');
-//   }
-// );
-
+//Authenticate and log in user or admin
 router.post('/login', passport.authenticate('local', {failureRedirect: '/'}), (req, res, next)=>{
   checkUser.checkUserType(req, res, next, {
     admin: '/admin',
@@ -78,13 +61,13 @@ router.post('/login', passport.authenticate('local', {failureRedirect: '/'}), (r
   });
 });
 
-//Log out user
+//Log out user or admin
 router.get('/logout', (req, res, next)=>{
   req.logout();
   res.redirect('/');
 });
 
-//Get user profile if user is already logged in
+//Check if user type is user before rendering route
 router.get('/profile', ensureLogin.ensureLoggedIn('/'), (req, res, next)=>{
   checkUser.user(req, res, next, {
     user: 'profile',
@@ -92,6 +75,7 @@ router.get('/profile', ensureLogin.ensureLoggedIn('/'), (req, res, next)=>{
   });
 });
 
+//Check if user is admin before rendering route
 router.get('/admin', ensureLogin.ensureLoggedIn('/'), (req, res, next)=>{
   checkUser.admin(req, res, next, {
     admin: 'admin',

@@ -1,5 +1,3 @@
-const express = require('express');
-
 exports.checkUserType = async (req, res , next, routes) => {
   try{
     if(req.user.type === 'admin'){
@@ -38,3 +36,27 @@ exports.user = async (req, res, next, routes) => {
     next(error);
   }
 }
+
+// exports.admin = async (req, res, next, failure) => {
+//   try{
+//     if(req.user.type === 'admin'){
+//       next();
+//     }else{
+//       return res.redirect(failure);
+//     }
+//   }catch(error){
+//     next(error);
+//   }
+// }
+
+// exports.user = async (req, res, next, failure) => {
+//   try{
+//     if(req.user.type === 'user'){
+//       next();
+//     }else{
+//       return res.redirect(failure);
+//     }
+//   }catch(error){
+//     next(error);
+//   }
+// }
