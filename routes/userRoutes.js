@@ -6,9 +6,10 @@ const ensureLogin = require('connect-ensure-login');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
+const checkUser = require('../controllers/auth/checkUserType');
+
 //Create new user
 router.post('/signup', async (req, res, next)=>{
-  
   try{
 
     const pass = req.body.password;
@@ -52,22 +53,30 @@ router.post('/signup', async (req, res, next)=>{
 });
 
 //Login user or admin
-router.post('/login', passport.authenticate('local', {failureRedirect: '/'}),
-  async (req, res, next)=>{
-    try{
-      if(req.user.type === 'admin'){
-        res.redirect('/adminDashboard');
-        return;
-      }else{
-        res.redirect('/profile');
-        return;
-      }
-    }catch(error){
-      next(error);
-    }
-    res.redirect('/');
-  }
-);
+// router.post('/login', passport.authenticate('local', {failureRedirect: '/'}),
+//   async (req, res, next)=>{
+//     try{
+//       if(req.user.type === 'admin'){
+//         res.redirect('/admin');
+//         return;
+//       }else{
+//         res.redirect('/profile');
+//         return;
+//       }
+//     }catch(error){
+//       next(error);
+//     }
+//     res.redirect('/');
+//   }
+// );
+
+router.post('/login', passport.authenticate('local', {failureRedirect: '/'}), (req, res, next)=>{
+  checkUser.checkUserType(req, res, next, {
+    admin: '/admin',
+    user: '/profile',
+    failure: '/'
+  });
+});
 
 //Log out user
 router.get('/logout', (req, res, next)=>{
@@ -77,19 +86,17 @@ router.get('/logout', (req, res, next)=>{
 
 //Get user profile if user is already logged in
 router.get('/profile', ensureLogin.ensureLoggedIn('/'), (req, res, next)=>{
-  if(req.user.type === 'user'){
-    return res.render('profile', {message: req.user.type});
-  }else{
-    res.redirect('/');
-  }
+  checkUser.user(req, res, next, {
+    user: 'profile',
+    failure: '/'
+  });
 });
 
-router.get('/adminDashboard', ensureLogin.ensureLoggedIn('/'), (req, res, next)=>{
-  if(req.user.type === 'admin'){
-    return res.render('adminDashboard', {message: req.user.type});
-  }else{
-    res.redirect('/');
-  }
+router.get('/admin', ensureLogin.ensureLoggedIn('/'), (req, res, next)=>{
+  checkUser.admin(req, res, next, {
+    admin: 'admin',
+    failure: '/'
+  });
 });
 
 module.exports = router;
