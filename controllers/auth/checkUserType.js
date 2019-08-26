@@ -1,62 +1,27 @@
-exports.checkUserType = async (req, res , next, routes) => {
-  try{
-    if(req.user.type === 'admin'){
-      res.redirect(routes.admin);
-      return;
-    }else{
-      res.redirect(routes.user);
-      return;
-    }
-  }catch(error){
-    next(error);
+exports.checkUserType = (req, res, next, routes)=>{
+  if(req.user.type === 'admin'){
+    res.redirect(routes.admin);
+    next();
+  }else{
+    res.redirect(routes.user);
+    next();
   }
-  res.redirect(routes.failure);
-}; 
+}
 
 exports.admin = async (req, res, next, routes) => {
-  try{
-    if(req.user.type === 'admin'){
-      return res.render(routes.admin, {message: req.user.type});
-    }else{
-      return res.redirect(routes.failure);
-    }
-  }catch(error){
-    next(error)
+  if(req.user.type === 'admin'){
+    res.render(routes.admin, {message: req.user.type});
+  }else{
+    res.redirect(routes.failure);
+    next();
   }
 }
 
 exports.user = async (req, res, next, routes) => {
-  try{
-    if(req.user.type === 'user'){
-      return res.render(routes.user, {message: req.user.type});
-    }else{
-      res.redirect(routes.failure);
-    }
-  }catch(error){
-    next(error);
+  if(req.user.type === 'user'){
+    res.render(routes.user, {message: req.user.type});
+  }else{
+    res.redirect(routes.failure);
+    next();
   }
 }
-
-// exports.admin = async (req, res, next, failure) => {
-//   try{
-//     if(req.user.type === 'admin'){
-//       next();
-//     }else{
-//       return res.redirect(failure);
-//     }
-//   }catch(error){
-//     next(error);
-//   }
-// }
-
-// exports.user = async (req, res, next, failure) => {
-//   try{
-//     if(req.user.type === 'user'){
-//       next();
-//     }else{
-//       return res.redirect(failure);
-//     }
-//   }catch(error){
-//     next(error);
-//   }
-// }

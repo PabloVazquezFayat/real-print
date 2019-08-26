@@ -57,7 +57,6 @@ router.post('/login', passport.authenticate('local', {failureRedirect: '/'}), (r
   checkUser.checkUserType(req, res, next, {
     admin: '/admin',
     user: '/profile',
-    failure: '/'
   });
 });
 
