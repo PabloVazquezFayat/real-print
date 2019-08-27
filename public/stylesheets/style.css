@@ -14,11 +14,6 @@ a {
   justify-content: center;
   align-items: center; }
 
-.navbar-wrapper {
-  background: red;
-  width: 80%;
-  height: 100%; }
-
 .footer-navbar-container {
   background: blue;
   width: 100%;

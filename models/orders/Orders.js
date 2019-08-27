@@ -7,6 +7,7 @@ const orderSchema = new Schema({
   fileURL: {type: String, required: true},
   textures: [{type: String}],
   client: {type: mongoose.Schema.Types.ObjectId, required:true, ref: 'Client'},
+  quantity: {type: Number, required: true},
   price: {type: Number},
   processor: {type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Processor'},
   status: {type: String, required: true},

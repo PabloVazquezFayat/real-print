@@ -1,13 +1,31 @@
 <div class="navbar-container">
-  <div class="navbar-wrapper">
-    <div class="navbar-logo">
 
-    </div>
-    <div class="navbar-nav-buttons">
-      <a href="/">Home</a>
-      <a href="/profile">Profile</a>
-      <a href="/admin">Admin</a>
-      <a href="/logout">Logout</a>
-    </div>
+  <div class="navbar-logo">
+    <img src="images/icons/logo.png" alt="Real-Print">
+    <h1>Real Print</h1>
   </div>
+
+  <div class="navbar-buttons">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/">Services</a></li>
+      <li><a href="/">Guidelines</a></li>
+      <li><a href="/">Contact</a></li>
+    </ul>
+  </div>
+
+  <div class="navbar-account">
+    {{#if user}}
+      <ul>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    {{else}}
+      <ul>
+        <li><a href="/signup">Sign Up</a></li>
+        <li><a href="/login">Sign In</a></li>
+      </ul>
+    {{/if}}
+  </div>
+
 </div>
