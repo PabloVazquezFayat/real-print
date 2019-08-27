@@ -18,6 +18,10 @@ const User          = require("./models/user/User");
 //REGISTER PARTIALS
 hbs.registerPartials(__dirname+"/views/partials");
 
+hbs.registerHelper('ifEquals', function(arg1, arg2, options) {
+  return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+});
+
 // Connect to DB
 mongoose.set('useCreateIndex', true);
 mongoose
