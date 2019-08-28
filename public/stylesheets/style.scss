@@ -8,15 +8,97 @@ a {
   color: #00B7FF;
 }
 
-
 //NAVBAR
 .navbar-container{
-  background: blue;
   width: 100%;
   height: 85px;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-logo{
+  width: 300px;
+  height: 100%;
+  display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.navbar-logo img{
+  width: 80px;
+  height: 80px;
+}
+
+.navbar-logo h1{
+  font-size: 32px;
+  margin: 0px;
+  padding: 0px;
+  line-height: 15px;
+  text-align: left;
+  color: #eb0089;
+}
+
+.navbar-logo h1 span{
+  font-size: 16px;
+  padding: 2px;
+  margin: 0px;
+  color: #4db8fe;
+}
+
+.navbar-buttons{
+  width: 500px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-buttons ul{
+  width: 100%;
+  padding: 0px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar-buttons ul li{
+  list-style: none;
+  padding: none;
+  float: none;
+}
+
+.navbar-buttons ul li a{
+  text-decoration: none;
+  text-align: center;
+}
+
+.navbar-account{
+  width: 300px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-account ul{
+  width: 100%;
+  padding: 0px;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-account ul li{
+  background: #4db8fe;
+  list-style: none;
+  padding: 10px 30px 10px 30px;
+  margin: 0px 10px 0px 10px;
+  border-radius: 50px;
+}
+
+.navbar-account ul li a{
+  color: white;
+  text-decoration: none;
+  text-align: center;
 }
 
 //FOOTER NAVBAR
@@ -37,6 +119,7 @@ a {
 
 //INDEX 
 .home-container{
+  background: linear-gradient(90deg, rgba(219,38,115,1) 0%, rgba(136,82,158,1) 50%, rgba(26,161,229,1) 100%);
   width: 100%;
   min-height: 600px;
   max-height: auto;
@@ -50,7 +133,6 @@ a {
 }
 
 .home-landing-wrapper{
-  background: purple;
   width: 80%;
   height: 100%;
   display: flex;
@@ -58,13 +140,11 @@ a {
 }
 
 .sign-up-wrapper{
-  background: green;
   width: 50%;
   height: 100%;
 }
 
 .log-in-wrapper{
-  background: yellow;
   width: 50%;
   height: 100%;
 }

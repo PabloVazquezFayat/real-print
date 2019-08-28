@@ -8,8 +8,18 @@ const passport = require('passport');
 
 const checkUser = require('../controllers/auth/checkUserType');
 
+//Sign Up page
+router.get('/signup', (req, res, next)=>{
+  res.render('signup');
+});
+
+//Sign In page
+router.get('/signin', (req, res, next)=>{
+  res.render('signin');
+});
+
 //Create new user
-router.post('/signup', async (req, res, next)=>{
+router.post('/signupUser', async (req, res, next)=>{
   try{
 
     const pass = req.body.password;

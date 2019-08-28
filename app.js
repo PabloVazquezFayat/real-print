@@ -15,9 +15,10 @@ const LocalStrategy = require("passport-local").Strategy;
 const flash         = require("connect-flash");
 const User          = require("./models/user/User");
 
-//REGISTER PARTIALS
+// Register HBS partial views
 hbs.registerPartials(__dirname+"/views/partials");
 
+// Register HBS value query helper
 hbs.registerHelper('ifEquals', function(arg1, arg2, options) {
   return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
 });
