@@ -43,7 +43,7 @@ router.post('/signupUser', async (req, res, next)=>{
 
     if(email){
       req.flash('error', 'This email is already in user, try again!');
-      res.redirect('/');
+      res.redirect('/signup');
       return;
     }
 
@@ -63,7 +63,7 @@ router.post('/signupUser', async (req, res, next)=>{
 });
 
 //Authenticate and log in user or admin
-router.post('/login', passport.authenticate('local', {failureRedirect: '/'}), (req, res, next)=>{
+router.post('/login', passport.authenticate('local', {failureRedirect: '/signin'}), (req, res, next)=>{
   checkUser.checkUserType(req, res, next, {
     admin: '/admin',
     user: '/profile',
